@@ -121,4 +121,8 @@ if ($flasher->hasMessages('error'))
 }
 ```
 
+## Tests
+
+Run ```phpunit``` to trigger the test suite.
+
 
