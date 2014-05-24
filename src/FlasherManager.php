@@ -7,6 +7,13 @@ use BadMethodCallException;
 class FlasherManager {
 
     /**
+     * The message store.
+     * 
+     * @var MessageStoreInterface
+     */
+    private $messageStore;
+
+    /**
      * Inject the MessageStore implementation 
      * into the class.
      * 
@@ -17,6 +24,12 @@ class FlasherManager {
         $this->messageStore = $messageStore;
     }
 
+
+    public function getMessageStore() 
+    {
+        return $this->messageStore;
+    }
+
     /**
      * Add a flash message.
      * 
@@ -25,9 +38,6 @@ class FlasherManager {
      */
     public function addMessage($message, $type = null) 
     {
-        $type = $this->validateType($type);
-        // Validate the parameters
-
         $message = new FlashMessage($message, $type);
 
         return $this->messageStore->add($message);
