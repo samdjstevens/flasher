@@ -12,7 +12,7 @@ Add the ```spanky/flasher``` package to your requirements, and ```composer insta
 ```json
 {
     "require": {
-        "spanky/flasher": "dev-master"
+        "spanky/flasher": "0.0.1"
     }
 }
 ``` 
