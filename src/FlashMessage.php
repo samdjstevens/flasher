@@ -3,11 +3,11 @@
 class FlashMessage {
 
     /**
-     * The message string.
+     * The message content.
      * 
      * @var string
      */
-    private $message;
+    private $content;
 
     /**
      * The message type.
@@ -19,23 +19,23 @@ class FlashMessage {
     /**
      * Give the message it's properties.
      * 
-     * @param string $message
+     * @param string $content
      * @param string $type
      */
-    public function __construct($message, $type) 
+    public function __construct($content, $type) 
     {
-        $this->message = $message;
+        $this->content = $content;
         $this->type = $type;
     }
 
     /**
-     * Get the message string.
+     * Get the message content.
      * 
      * @return string
      */
-    public function getMessage() 
+    public function getContent() 
     {
-        return $this->message;
+        return $this->content;
     }
 
     /**
@@ -56,6 +56,6 @@ class FlashMessage {
      */
     public function __toString() 
     {
-        return $this->getMessage();
+        return $this->getContent();
     }
 }
