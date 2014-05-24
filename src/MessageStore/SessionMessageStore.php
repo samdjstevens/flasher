@@ -25,14 +25,14 @@ class SessionMessageStore implements MessageStoreInterface {
      */
     public function __construct() 
     {
-        $this->load();
+        $this->loadMessages();
     }
 
     /**
      * Load in previously set messages from
      * the session, and then forget them.
      */
-    public function load() 
+    public function loadMessages() 
     {
         session_start();
         // Ensure the session is started
@@ -42,8 +42,16 @@ class SessionMessageStore implements MessageStoreInterface {
             // If there are messages to grab
             $this->messages = $_SESSION[$this->sessionKey];
             // Load in the messages
+
             unset($_SESSION[$this->sessionKey]);
             // And then forget them from the session
+            
+            $this->messages = array_map(function($message) 
+            {
+                return new FlashMessage($message['content'], $message['type']);
+
+            }, $this->messages);
+            // Loop through the messages and convert to FlashMessage objects
         }
     }
 
@@ -56,13 +64,13 @@ class SessionMessageStore implements MessageStoreInterface {
     {
         $flashMessage = array(
 
-            'message'   => $message->getContent(), 
+            'content'   => $message->getContent(), 
             'type'      => $message->getType()
 
         );
         // Create a new message from the message
 
-        array_push($this->messages, $flashMessage);
+        array_push($this->messages, $message);
         // Add it to the internal array
 
         $_SESSION[$this->sessionKey][] = $flashMessage;
@@ -90,7 +98,7 @@ class SessionMessageStore implements MessageStoreInterface {
     {
         return array_filter($this->messages, function($message) use ($type)
         {
-            return $message['type'] === $type;
+            return $message->getType() === $type;
         });
     }
 }

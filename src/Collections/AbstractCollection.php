@@ -5,7 +5,7 @@ use ArrayIterator;
 use Countable;
 use ArrayAccess;
 
-abstract class AbstractCollection implements IteratorAggregate, ArrayAccess, Countable{
+abstract class AbstractCollection implements IteratorAggregate, ArrayAccess, Countable {
 
     /**
      * The items belonging to the collection.
@@ -22,27 +22,8 @@ abstract class AbstractCollection implements IteratorAggregate, ArrayAccess, Cou
      */
     public function __construct($items = array()) 
     {
-        $this->transformItems($items);
+        $this->items = $items;
     }
-
-    /**
-     * Spin all the items through the
-     * transform method.
-     * 
-     * @param  array $items
-     */
-    private function transformItems(array $items) 
-    {
-         $this->items = array_map(array(&$this, 'transform'), $items);
-    }
-
-    /**
-     * Transform an item.
-     * 
-     * @param  array $item
-     * @return mixed
-     */
-    abstract public function transform(array $item);
 
     /**
      * Get the first item in the collection.
