@@ -6,6 +6,7 @@
             "email": "samdjstevens@googlemail.com"
         }
     ],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Spanky\\Flasher\\": "src"
