@@ -34,9 +34,6 @@ class SessionMessageStore implements MessageStoreInterface {
      */
     public function loadMessages() 
     {
-        session_start();
-        // Ensure the session is started
-
         if (array_key_exists($this->sessionKey, $_SESSION)) 
         {
             // If there are messages to grab
