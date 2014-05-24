@@ -1,0 +1,14 @@
+{
+    "name": "spanky/flasher",
+    "authors": [
+        {
+            "name": "samdjstevens",
+            "email": "samdjstevens@googlemail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Spanky\\Flasher\\": "src"
+        }
+    }
+}
