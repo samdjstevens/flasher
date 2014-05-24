@@ -1,5 +1,7 @@
 <?php namespace Spanky\Flasher\MessageStore;
 
+use Spanky\Flasher\FlashMessage;
+
 class SessionMessageStore implements MessageStoreInterface {
 
     /**
@@ -48,19 +50,17 @@ class SessionMessageStore implements MessageStoreInterface {
     /**
      * Add a message into the store.
      * 
-     * @param string $message
-     * @param mixed  $type
+     * @param Spanky\Flasher\FlashMessage $message
      */
-    public function add($message, $type = null) 
+    public function add(FlashMessage $message) 
     {
         $flashMessage = array(
 
-            'message'   => $message, 
-            'type'      => $type
+            'message'   => $message->getContent(), 
+            'type'      => $message->getType()
 
         );
         // Create a new message from the message
-        // and message type
 
         array_push($this->messages, $flashMessage);
         // Add it to the internal array

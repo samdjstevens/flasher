@@ -30,7 +30,9 @@ class FlasherManager {
         $type = $this->validateType($type);
         // Validate the parameters
 
-        return $this->messageStore->add($message, $type);
+        $message = new FlashMessage($message, $type);
+
+        return $this->messageStore->add($message);
         // Add the message into the message store
     }
 

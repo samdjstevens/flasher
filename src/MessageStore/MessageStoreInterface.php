@@ -1,14 +1,15 @@
 <?php namespace Spanky\Flasher\MessageStore;
 
+use Spanky\Flasher\FlashMessage;
+
 interface MessageStoreInterface {
 
     /**
      * Add a message into the store.
      * 
-     * @param string $message
-     * @param mixed  $type
+     * @param Spanky\Flasher\FlashMessage $message
      */
-    public function add($message, $type = null);
+    public function add(FlashMessage $message);
 
     /**
      * Get all the messages in the store.
