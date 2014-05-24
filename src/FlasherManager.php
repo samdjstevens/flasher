@@ -2,7 +2,6 @@
 
 use Spanky\Flasher\MessageStore\MessageStoreInterface;
 use Spanky\Flasher\Collections\MessageCollection;
-use InvalidArgumentException;
 use BadMethodCallException;
 
 class FlasherManager {
@@ -26,7 +25,6 @@ class FlasherManager {
      */
     public function addMessage($message, $type = null) 
     {
-        $message = $this->validateMessage($message);
         $type = $this->validateType($type);
         // Validate the parameters
 
@@ -36,53 +34,7 @@ class FlasherManager {
         // Add the message into the message store
     }
 
-    /**
-     * Validate a message.
-     * 
-     * @param  mixed $message
-     * @return string
-     */
-    private function validateMessage($message) 
-    {
-        if (! is_string($message) and ! (is_object($message) and method_exists($message, '__toString'))) 
-        {
-            throw new InvalidArgumentException(
-                "Message must be of type string, or implement the __toString method."
-            );
-        }
-        // Ensure the message is either a string, or an
-        // object that implements the __toString method
 
-        return (string) $message;
-        // Cast to string if an object
-    }
-
-    /**
-     * Validate a message type.
-     * 
-     * @param  mixed $message
-     * @return string
-     */
-    private function validateType($type) 
-    {
-        if (is_null($type)) 
-        {
-            return 'default';
-        }
-        // If no type specified, give it 'default'
-
-        if (! is_string($type) and ! (is_object($type) and method_exists($type, '__toString'))) 
-        {
-            throw new InvalidArgumentException(
-                "Type must be of type string, or implement the __toString method."
-            );
-        }
-        // Ensure the message is either a string, or an
-        // object that implements the __toString method
-
-        return (string) $type;
-        // Cast to string if an object
-    }
 
     /**
      * Determine if there are messages to
