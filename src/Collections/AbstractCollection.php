@@ -26,6 +26,16 @@ abstract class AbstractCollection implements IteratorAggregate, ArrayAccess, Cou
     }
 
     /**
+     * Retrieve the internal array of items.
+     * 
+     * @return array
+     */
+    public function all() 
+    {
+        return $this->items;
+    }
+
+    /**
      * Get the first item in the collection.
      * 
      * @return mixed

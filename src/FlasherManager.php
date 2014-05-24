@@ -7,9 +7,9 @@ use BadMethodCallException;
 class FlasherManager {
 
     /**
-     * The message store.
+     * The message store implementation.
      * 
-     * @var MessageStoreInterface
+     * @var Spanky\Flasher\MessageStore\MessageStoreInterface
      */
     private $messageStore;
 
@@ -17,14 +17,18 @@ class FlasherManager {
      * Inject the MessageStore implementation 
      * into the class.
      * 
-     * @param MessageStoreInterface $messageStore
+     * @param Spanky\Flasher\MessageStore\MessageStoreInterface $messageStore
      */
     public function __construct(MessageStoreInterface $messageStore) 
     {
         $this->messageStore = $messageStore;
     }
 
-
+    /**
+     * Get the message store implementation.
+     * 
+     * @return Spanky\Flasher\MessageStore\MessageStoreInterface
+     */
     public function getMessageStore() 
     {
         return $this->messageStore;
@@ -33,18 +37,18 @@ class FlasherManager {
     /**
      * Add a flash message.
      * 
-     * @param mixed $message
+     * @param mixed $content
      * @param mixed $type
      */
-    public function addMessage($message, $type = null) 
+    public function addMessage($content, $type = null) 
     {
-        $message = new FlashMessage($message, $type);
+        $message = new FlashMessage($content, $type);
+        // Create a new FlashMessage with the content
+        // and type
 
         return $this->messageStore->add($message);
         // Add the message into the message store
     }
-
-
 
     /**
      * Determine if there are messages to
@@ -64,7 +68,7 @@ class FlasherManager {
      * Get all the messages to be shown.
      * 
      * @param  string $type
-     * @return Spanky\Flasher\MesageCollection
+     * @return Spanky\Flasher\MessageCollection
      */
     public function getMessages($type = null) 
     {
@@ -103,19 +107,23 @@ class FlasherManager {
             // the type of whatever comes next.
 
             $type = lcfirst(substr($method, 3));
+            // Extract the type from the method
+            // name
 
             if ($type === '') $type = null;
             // If no type text was specified,
             // then set to null
 
-            $message = isset($args[0]) ? $args[0] : null;
-            // Get the message
+            $content = isset($args[0]) ? $args[0] : null;
+            // Get the content for the message
 
-            return $this->addMessage($message, $type);
+            return $this->addMessage($content, $type);
             // Add the message
         }
 
-        throw new BadMethodCallException("Method '{$method}' not found in " . __CLASS__);
+        throw new BadMethodCallException(
+            "Method '{$method}' not found in " . __CLASS__
+        );
         // Throw an exception detailing the missing method
     }
 }
