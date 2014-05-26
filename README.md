@@ -23,7 +23,6 @@ trying to use Flasher.
     require 'vendor/autoload.php';
 ```
 
-
 ## Usage
 
 To get up and running, first we need to make an instance of the ```Spanky\Flasher\FlasherManager``` class. 
@@ -127,6 +126,43 @@ if ($flasher->hasMessages('error'))
     echo '<div class="error"><strong>', $flasher->getMessages('error')->first(), '</strong></div>';
 }
 ```
+
+## Using with Laravel
+
+If you're using this package with [Laravel](http://laravel.com), then you can take advantage of the 
+provided service provider and facade to skip the bootstrapping.
+
+First, add ```Spanky\Flasher\Laravel\FlasherServiceProvider``` to the list of 
+```providers``` in your ```config.php``` file.
+
+```php
+'providers' => array(
+    ...
+    'Spanky\Flasher\Laravel\FlasherServiceProvider',
+)
+```
+
+Next, add the following key/value pair to the list of ```aliases``` in the same file.
+
+```php
+'aliases' => array(
+    ...
+    'Spanky\Flasher\Laravel\Flasher' => 'Flasher'
+)
+```
+
+You are now free to use the package by statically calling method names of the 
+```Spanky\Flasher\FlasherManager``` class on the ```Flasher``` "facade" class:
+
+```php
+Route::post('/login', function()
+{
+    // logic code here
+
+    Flasher::addSuccess('You are now logged in!');
+    return Redirect::to('dashboard');
+});
+``` 
 
 ## Tests
 
