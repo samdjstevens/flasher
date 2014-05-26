@@ -1,7 +1,9 @@
 <?php namespace Spanky\Flasher\Laravel;
 
 use Illuminate\Support\ServiceProvider;
-use Spanky\Flasher\Factory;
+use Spanky\Flasher\FlasherManager;
+use Spanky\Flasher\MessageStore\LaravelSessionMessageStore;
+use Illuminate\Session\SessionManager;
 
 class FlasherServiceProvider extends ServiceProvider {
 
@@ -14,7 +16,8 @@ class FlasherServiceProvider extends ServiceProvider {
     {
         $this->app->bind('flasher', function() 
         {
-            return Factory::make();
+            $sessionManager = $this->app->make('Illuminate\Session\SessionManager');
+            return new FlasherManager(new LaravelSessionMessageStore($sessionManager));
         });
     }
 
