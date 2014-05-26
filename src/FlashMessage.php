@@ -27,9 +27,7 @@ class FlashMessage {
     public function __construct($content, $type = null) 
     {
         $this->setContent($content);
-        // Set the content
         $this->setType($type);
-        // Set the type
     }
 
     /**
@@ -50,7 +48,6 @@ class FlashMessage {
     public function setContent($content) 
     {
         $content = $this->validateContent($content);
-        // Validate the content
 
         $this->content = $content;
     }
@@ -73,7 +70,6 @@ class FlashMessage {
     public function setType($type) 
     {
         $type = $this->validateType($type);
-        // Validate the type
 
         $this->type = $type;
     }
@@ -119,7 +115,7 @@ class FlashMessage {
                 "Type must be of type string, or implement the __toString method."
             );
         }
-        // Ensure the message is either a string, or an
+        // Ensure the type is either a string, or an
         // object that implements the __toString method
 
         return (string) $type;
@@ -127,7 +123,7 @@ class FlashMessage {
     }
 
     /**
-     * Return the message string when
+     * Return the content when
      * the object is casted to a string.
      * 
      * @return string
