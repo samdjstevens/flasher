@@ -38,6 +38,13 @@ use Spanky\Flasher\Factory as Flasher;
 $flasher = Flasher::make();
 ```
 
+If using the ```Spanky\Flasher\MessageStore\SessionMessageStore``` implementation (the default) to 
+store messages between page loads, ensure that the session is started before initialising the package:
+
+```php
+session_start();
+```
+
 ### Setting messages
 
 To set a message to be displayed on the next page load, call the ```addMessage()``` method, 
