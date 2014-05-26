@@ -11,7 +11,7 @@ class FlasherManager {
      * 
      * @var Spanky\Flasher\MessageStore\MessageStoreInterface
      */
-    private $messageStore;
+    protected $messageStore;
 
     /**
      * Inject the MessageStore implementation 

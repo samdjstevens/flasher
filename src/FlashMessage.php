@@ -9,14 +9,14 @@ class FlashMessage {
      * 
      * @var string
      */
-    private $content;
+    protected $content;
 
     /**
      * The message type.
      * 
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * Give the message it's properties.
@@ -80,7 +80,7 @@ class FlashMessage {
      * @param  mixed $content
      * @return string
      */
-    private function validateContent($content) 
+    protected function validateContent($content) 
     {
         if (! is_string($content) and ! (is_object($content) and method_exists($content, '__toString'))) 
         {
@@ -101,7 +101,7 @@ class FlashMessage {
      * @param  mixed $type
      * @return string
      */
-    private function validateType($type) 
+    protected function validateType($type) 
     {
         if (is_null($type)) 
         {

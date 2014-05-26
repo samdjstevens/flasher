@@ -10,14 +10,14 @@ class SessionMessageStore implements MessageStoreInterface {
      * 
      * @var string
      */
-    private $sessionKey = 'spanky.flasher.messages';
+    protected $sessionKey = 'spanky.flasher.messages';
 
     /**
      * The messages in the store.
      * 
      * @var array
      */
-    private $messages = array();
+    protected $messages = array();
 
     /**
      * Load the messages in from 
@@ -32,7 +32,7 @@ class SessionMessageStore implements MessageStoreInterface {
      * Load in previously set messages from
      * the session, and then forget them.
      */
-    public function loadMessages() 
+    protected function loadMessages() 
     {
         if (array_key_exists($this->sessionKey, $_SESSION)) 
         {
@@ -59,19 +59,16 @@ class SessionMessageStore implements MessageStoreInterface {
      */
     public function add(FlashMessage $message) 
     {
-        $flashMessage = array(
+        $_SESSION[$this->sessionKey][] = array(
 
             'content'   => $message->getContent(), 
             'type'      => $message->getType()
 
         );
-        // Create a new message from the message
+        // And to the session for the next load
 
         array_push($this->messages, $message);
         // Add it to the internal array
-
-        $_SESSION[$this->sessionKey][] = $flashMessage;
-        // And to the session for the next load
     }
 
     /**

@@ -12,7 +12,7 @@ abstract class AbstractCollection implements IteratorAggregate, ArrayAccess, Cou
      * 
      * @var array
      */
-    private $items = array();
+    protected $items = array();
 
     /**
      * Accept an array of items and transform
